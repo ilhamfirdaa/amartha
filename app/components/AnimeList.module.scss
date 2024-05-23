@@ -9,15 +9,27 @@
   display: flex;
   flex-direction: column;
   width: 165px;
-  height: 350px;
+  height: 320px;
   margin: 1em;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.45);
   background: #eee;
+  border-radius: 0.5em;
+  cursor: pointer;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.45);
 }
 
 .card__image {
   width: 100%;
   max-height: 200px;
+  border-top-left-radius: 0.25em;
+  border-top-right-radius: 0.25em;
+}
+
+.card__title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* Number of lines to display */
+  -webkit-line-clamp: 2; /* Change to the number of lines you want */
 }
 
 .card__body {

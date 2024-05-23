@@ -4,14 +4,20 @@ import React, { useEffect, useState } from "react";
 import { AnimeData } from "../types";
 import { formatNumber } from "../utils/helper";
 import styles from "./AnimeList.module.scss";
+import Pagination from "./Pagination";
+
+const ITEMS_PER_PAGE = 10;
 
 const AnimeList = () => {
   const [animes, setAnime] = useState<AnimeData>();
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`https://api.jikan.moe/v4/anime?limit=${10}`);
+        const res = await fetch(
+          `https://api.jikan.moe/v4/anime?limit=${ITEMS_PER_PAGE}&page=${currentPage}`
+        );
 
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -24,7 +30,7 @@ const AnimeList = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [currentPage]);
 
   return (
     <>
@@ -41,22 +47,29 @@ const AnimeList = () => {
             <div className={styles.card__body}>
               <div className="flex gap-x-5">
                 <span className="text-sm">
-                  ⭐ {anime.score} ({formatNumber(anime.scored_by)})
+                  ⭐{" "}
+                  {anime.score
+                    ? `${anime.score} (
+                    ${formatNumber(anime.scored_by)})`
+                    : "-"}
                 </span>
               </div>
-              <h2>{anime.title}</h2>
-              <div className="flex gap-x-5 text-xs">
+              <h2 className={styles.card__title}>{anime.title}</h2>
+              <div className="flex gap-x-5 text-xs mt-auto">
                 <span>{anime.year || "-"}</span>
                 <span>{anime.episodes} eps</span>
-              </div>
-              <div className={styles.card__actions}>
-                <button className="text-sky-800 bg-gray-300 hover:bg-gray-400 py-1 px-5 rounded-sm">
-                  Detail
-                </button>
               </div>
             </div>
           </div>
         ))}
+
+        {animes && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={animes?.pagination.last_visible_page}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        )}
       </div>
     </>
   );
