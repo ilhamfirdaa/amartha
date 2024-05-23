@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1em 0;
+  background-color: black;
+  color: white;
+  max-width: 1024px;
+}
+
+.input {
+  padding: 4px 10px;
+  border-radius: 4px;
+}
