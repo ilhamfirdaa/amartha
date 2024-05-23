@@ -1,18 +1,12 @@
 import React from "react";
-import { AnimeData } from "./types";
+import AnimeList from "./components/AnimeList";
+import Navbar from "./components/Navbar";
 
-const Home = async () => {
-  const res = await fetch("https://api.jikan.moe/v4/anime");
-  const animes: AnimeData = await res.json();
-
+const Home = () => {
   return (
     <>
-      <h1>Anime List</h1>
-      <ul>
-        {animes.data.map((anime) => (
-          <li key={anime.mal_id}>{anime.title}</li>
-        ))}
-      </ul>
+      <Navbar />
+      <AnimeList />
     </>
   );
 };

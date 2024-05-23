@@ -4,6 +4,7 @@ export interface Anime {
   url: string;
   episodes: number;
   score: number;
+  scored_by: number;
   year: number;
   images: {
     webp: {
@@ -17,9 +18,9 @@ export interface Pagination {
   has_next_page: boolean;
   current_page: number;
   items: {
-      count: number,
-      total: number,
-      per_page: number,
+    count: number;
+    total: number;
+    per_page: number;
   };
 }
 
