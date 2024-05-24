@@ -6,18 +6,21 @@ import { formatNumber } from "../utils/helper";
 import styles from "./AnimeList.module.scss";
 import Pagination from "./Pagination";
 
+interface AnimeListProps {
+  searchQuery: string;
+}
+
 const ITEMS_PER_PAGE = 10;
 
-const AnimeList = () => {
+const AnimeList: React.FC<AnimeListProps> = ({ searchQuery }) => {
   const [animes, setAnime] = useState<AnimeData>();
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
+      const url = `https://api.jikan.moe/v4/anime?limit=${ITEMS_PER_PAGE}&page=${currentPage}&q=${searchQuery}`;
       try {
-        const res = await fetch(
-          `https://api.jikan.moe/v4/anime?limit=${ITEMS_PER_PAGE}&page=${currentPage}`
-        );
+        const res = await fetch(url);
 
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -30,7 +33,7 @@ const AnimeList = () => {
       }
     };
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, searchQuery]);
 
   return (
     <>
@@ -38,6 +41,7 @@ const AnimeList = () => {
         {animes?.data.map((anime) => (
           <div key={anime.mal_id} className={styles.card}>
             <figure>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={anime.images.webp.image_url}
                 alt={anime.title}

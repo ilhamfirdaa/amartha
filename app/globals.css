@@ -6,4 +6,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #7f8c8d;
+  background-color: #ecf0f1;
 }
