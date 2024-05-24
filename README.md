@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">Table Search and Filter</h1>
 
-## Getting Started
+## Description
 
-First, run the development server:
+This is a project to fetch anime data list and present it in a page. This list has a pagination and can be searched by keyword. And it also have a detail page of each anime for more information.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## About the project.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project was created with next.js. This project also has a responsive display when accessed from various screen sizes / devices.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project setup
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+After cloning repository, follow instruction below.
 
-## Learn More
+In the project directory, you can run:
 
-To learn more about Next.js, take a look at the following resources:
+### `npm install`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Install all depedencies of this project. And then:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### `npm run dev`
 
-## Deploy on Vercel
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### `npm run build`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Builds the app for production to the `.next` folder.<br />
+It correctly bundles Next in production mode and optimizes the build for the best performance.
+
+### `npm run start`
+
+After the build process is complete, you can start the production server.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Vercel
+
+Or you can see the production mode that I've deployed on [vercel](https://amartha-mu.vercel.app/)
