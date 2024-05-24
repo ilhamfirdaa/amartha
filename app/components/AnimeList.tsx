@@ -5,6 +5,7 @@ import { AnimeData } from "../types";
 import { formatNumber } from "../utils/helper";
 import styles from "./AnimeList.module.scss";
 import Pagination from "./Pagination";
+import { useRouter } from "next/navigation";
 
 interface AnimeListProps {
   searchQuery: string;
@@ -15,6 +16,7 @@ const ITEMS_PER_PAGE = 10;
 const AnimeList: React.FC<AnimeListProps> = ({ searchQuery }) => {
   const [animes, setAnime] = useState<AnimeData>();
   const [currentPage, setCurrentPage] = useState(1);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +41,11 @@ const AnimeList: React.FC<AnimeListProps> = ({ searchQuery }) => {
     <>
       <div className={styles.container}>
         {animes?.data.map((anime) => (
-          <div key={anime.mal_id} className={styles.card}>
+          <div
+            key={anime.mal_id}
+            className={styles.card}
+            onClick={() => router.push(`/detail/${anime.mal_id}`)}
+          >
             <figure>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -53,8 +59,7 @@ const AnimeList: React.FC<AnimeListProps> = ({ searchQuery }) => {
                 <span className="text-sm">
                   ⭐{" "}
                   {anime.score
-                    ? `${anime.score} (
-                    ${formatNumber(anime.scored_by)})`
+                    ? `${anime.score} (${formatNumber(anime.scored_by)})`
                     : "-"}
                 </span>
               </div>
