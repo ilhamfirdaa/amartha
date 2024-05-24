@@ -1,10 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 import AnimeList from "@/app/components/animeList/AnimeList";
+import Skeleton from "@/app/components/skeleton/Skeleton";
 
 const Home = () => {
+  const SuspenseFallback = () => {
+    return <></>;
+  };
+
   return (
     <>
-      <AnimeList />
+      <Suspense fallback={<SuspenseFallback />}>
+        <AnimeList />
+      </Suspense>
     </>
   );
 };
