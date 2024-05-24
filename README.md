@@ -1,8 +1,8 @@
-<h1 align="center">Table Search and Filter</h1>
+<h1 align="center">Anime Database</h1>
 
 ## Description
 
-This is a project to fetch anime data list and present it in a page. This list has a pagination and can be searched by keyword. And it also have a detail page of each anime for more information.
+This is a project to fetch anime database and present it in a page. This list has a pagination and can be searched by keyword. And it also have a detail page of each anime for more information.
 
 ## About the project.
 
