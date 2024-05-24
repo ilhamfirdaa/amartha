@@ -1,19 +1,15 @@
+"use client";
+
 import React, { useState } from "react";
-import styles from "./SearchBar.module.scss";
+import { useRouter } from "next/navigation";
+import styles from "./searchBar.module.scss";
 
-interface SearchBarProps {
-  onSearch: (query: string) => void;
-}
-
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+const SearchBar = () => {
   const [query, setQuery] = useState("");
+  const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
-  };
-
-  const handleSearch = () => {
-    onSearch(query);
   };
 
   return (
@@ -25,7 +21,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         onChange={handleInputChange}
         className={styles.input__search}
       />
-      <button onClick={handleSearch} className={styles.btn__search}>
+      <button
+        onClick={() => router.push(`/?q=${query}`)}
+        className={styles.btn__search}
+      >
         🔍
       </button>
     </div>

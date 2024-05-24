@@ -1,30 +1,28 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { AnimeData } from "../types";
-import { formatNumber } from "../utils/helper";
-import styles from "./AnimeList.module.scss";
-import Pagination from "./Pagination";
-import { useRouter } from "next/navigation";
-import Skeleton from "./skeleton/Skeleton";
-
-interface AnimeListProps {
-  searchQuery: string;
-}
+import { useRouter, useSearchParams } from "next/navigation";
+import { AnimeData } from "@/app/types";
+import styles from "./animeList.module.scss";
+import Pagination from "@/app/components/pagination/Pagination";
+import { formatNumber } from "@/app/utils/helper";
+import Skeleton from "@/app/components/skeleton/Skeleton";
 
 const ITEMS_PER_PAGE = 10;
 
-const AnimeList: React.FC<AnimeListProps> = ({ searchQuery }) => {
+const AnimeList = () => {
   const [animes, setAnime] = useState<AnimeData>();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [query, setQuery] = useState<string | null>("");
 
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const url = `https://api.jikan.moe/v4/anime?limit=${ITEMS_PER_PAGE}&page=${currentPage}&q=${searchQuery}`;
+      const url = `https://api.jikan.moe/v4/anime?limit=${ITEMS_PER_PAGE}&page=${currentPage}&q=${query}`;
       try {
         const res = await fetch(url);
 
@@ -41,7 +39,11 @@ const AnimeList: React.FC<AnimeListProps> = ({ searchQuery }) => {
       }
     };
     fetchData();
-  }, [currentPage, searchQuery]);
+  }, [currentPage, query]);
+
+  useEffect(() => {
+    setQuery(searchParams.get("q") ?? "");
+  }, [searchParams]);
 
   const ListSkeleton = () => {
     const items: JSX.Element[] = [];
@@ -54,13 +56,11 @@ const AnimeList: React.FC<AnimeListProps> = ({ searchQuery }) => {
   };
 
   return (
-    <>
+    <section id="anime-list" className={styles.container}>
       {loading ? (
-        <div className={styles.container}>
-          <ListSkeleton />
-        </div>
+        <ListSkeleton />
       ) : (
-        <div className={styles.container}>
+        <>
           {animes?.data.map((anime) => (
             <div
               key={anime.mal_id}
@@ -100,9 +100,9 @@ const AnimeList: React.FC<AnimeListProps> = ({ searchQuery }) => {
               onPageChange={(page) => setCurrentPage(page)}
             />
           )}
-        </div>
+        </>
       )}
-    </>
+    </section>
   );
 };
 

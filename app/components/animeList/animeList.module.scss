@@ -2,14 +2,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 1024px;
+  width: 1024px;
+  background-color: white;
+  padding: 1em;
 }
 
 .card {
   display: flex;
   flex-direction: column;
   width: 165px;
-  height: 320px;
+  height: 310px;
   margin: 1em;
   background: #eee;
   border-radius: 0.5em;
